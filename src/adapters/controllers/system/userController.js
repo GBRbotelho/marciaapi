@@ -1,6 +1,7 @@
 const updater = require("../../../usecase/system/user/updater");
 const creater = require("../../../usecase/system/user/creater");
 const deleter = require("../../../usecase/system/user/deleter");
+const login = require("../../../usecase/system/user/login");
 
 module.exports = {
   async creater(req, res) {
@@ -49,6 +50,22 @@ module.exports = {
       }
     } catch (error) {
       console.error("Erro ao deletar usuário:", error);
+      res.status(500).send("Erro interno do servidor");
+    }
+  },
+  async login(req, res) {
+    try {
+      const data = req.body;
+
+      const isLogin = await login(data);
+
+      if (isLogin.success) {
+        res.status(200).json(isLogin);
+      } else {
+        res.status(404).send(isLogin);
+      }
+    } catch (error) {
+      console.error("Erro ao criar usuário:", error);
       res.status(500).send("Erro interno do servidor");
     }
   },

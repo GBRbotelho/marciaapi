@@ -3,6 +3,7 @@ const router = express.Router();
 const UserController = require("../../controllers/system/userController");
 
 router.post("/", UserController.creater);
+router.post("/login", UserController.login);
 router.put("/:id", UserController.updater);
 router.delete("/:id", UserController.deleter);
 
