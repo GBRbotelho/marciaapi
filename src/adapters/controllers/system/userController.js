@@ -2,6 +2,7 @@ const updater = require("../../../usecase/system/user/updater");
 const creater = require("../../../usecase/system/user/creater");
 const deleter = require("../../../usecase/system/user/deleter");
 const login = require("../../../usecase/system/user/login");
+const getByToken = require("../../../usecase/system/user/getByToken");
 
 module.exports = {
   async creater(req, res) {
@@ -67,6 +68,21 @@ module.exports = {
     } catch (error) {
       console.error("Erro ao criar usuário:", error);
       res.status(500).send("Erro interno do servidor");
+    }
+  },
+  async getByToken(req, res) {
+    try {
+      const token = req.headers.authorization;
+
+      const userData = await getByToken(token);
+
+      if (userData) {
+        return res.status(200).json(userData);
+      } else {
+        return res.status(402).json(userData);
+      }
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
     }
   },
 };

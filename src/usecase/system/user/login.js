@@ -18,7 +18,6 @@ const login = async (userData) => {
     if (isPasswordValid) {
       const token = jwtService.createToken({
         userId: user._id,
-        email: user.email,
       });
 
       return {
