@@ -1,4 +1,5 @@
 const repository = require("../../../adapters/repositories/system/userRepository");
+const bcrypt = require("bcrypt");
 
 const creater = async (data) => {
   try {
@@ -11,6 +12,8 @@ const creater = async (data) => {
       companies,
       cpf,
     };
+
+    newUser.password = await bcrypt.hash(newUser.password, 10);
 
     const response = await repository.create(newUser);
 

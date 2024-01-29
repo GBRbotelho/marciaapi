@@ -1,4 +1,5 @@
 const repository = require("../../../adapters/repositories/system/userRepository");
+const bcrypt = require("bcrypt");
 
 const login = async (userData) => {
   try {
@@ -8,7 +9,10 @@ const login = async (userData) => {
       return { success: false, message: "Usuário não encontrado" };
     }
 
-    const isPasswordValid = user.password === userData.password;
+    const isPasswordValid = await bcrypt.compare(
+      userData.password,
+      user.password
+    );
 
     if (isPasswordValid) {
       return {
