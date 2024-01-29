@@ -1,5 +1,6 @@
 const repository = require("../../../adapters/repositories/system/userRepository");
 const bcrypt = require("bcrypt");
+const jwtService = require("../../../frameworks/jsonwebtoken/jwtService");
 
 const login = async (userData) => {
   try {
@@ -15,10 +16,15 @@ const login = async (userData) => {
     );
 
     if (isPasswordValid) {
+      const token = jwtService.createToken({
+        userId: user._id,
+        email: user.email,
+      });
+
       return {
         success: true,
         message: "Usuário logado com sucesso",
-        data: "token",
+        data: token,
       };
     } else {
       return { success: false, message: "Senha incorreta", data: "" };
