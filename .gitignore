@@ -9,5 +9,5 @@ build/
 
 package-lock.json
 test.http
-config.js
 .env
+gmail.json
