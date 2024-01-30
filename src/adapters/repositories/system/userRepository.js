@@ -7,8 +7,8 @@ module.exports = {
   async getByEmail(email) {
     return await User.findOne({ email });
   },
-  async getByCpf(resetToken) {
-    return await User.findOne({ resetPasswordToken: resetToken });
+  async getByCpf(cpf) {
+    return await User.findOne({ cpf });
   },
   async update(userId, userData) {
     return await User.findByIdAndUpdate(userId, userData, { new: true });
