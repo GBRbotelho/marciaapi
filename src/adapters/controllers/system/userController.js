@@ -3,6 +3,7 @@ const creater = require("../../../usecase/system/user/creater");
 const deleter = require("../../../usecase/system/user/deleter");
 const login = require("../../../usecase/system/user/login");
 const getByToken = require("../../../usecase/system/user/getByToken");
+const confirmCode = require("../../../usecase/system/user/confirmCode");
 
 module.exports = {
   async creater(req, res) {
@@ -83,6 +84,24 @@ module.exports = {
       }
     } catch (error) {
       return res.status(500).json({ error: error.message });
+    }
+  },
+  async confirmCodeEmail(req, res) {
+    try {
+      const userId = req.params.id;
+      const data = req.body;
+      console.log("Data é");
+      console.log(data);
+      const confirmed = await confirmCode(userId, data);
+
+      if (confirmed.success) {
+        res.status(200).json(confirmed);
+      } else {
+        res.status(404).send(confirmed);
+      }
+    } catch (error) {
+      console.error("Erro ao atualizar usuário:", error);
+      res.status(500).send("Erro interno do servidor");
     }
   },
 };
