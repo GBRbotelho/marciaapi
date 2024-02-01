@@ -2,8 +2,11 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 
 function connectMongo(bd) {
+  console.log(`${process.env.DB}${bd}${process.env.DB2}`);
   mongoose
-    .connect(`${process.env.DB}${bd}`, {
+    .connect(`${process.env.DB}${bd}${process.env.DB2}`, {
+      autoCreate: false,
+      autoIndex: false,
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
