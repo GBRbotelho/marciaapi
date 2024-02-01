@@ -4,6 +4,7 @@ const deleter = require("../../../usecase/system/user/deleter");
 const login = require("../../../usecase/system/user/login");
 const getByToken = require("../../../usecase/system/user/getByToken");
 const confirmCode = require("../../../usecase/system/user/confirmCode");
+const refreshToken = require("../../../usecase/system/user/refreshToken");
 
 module.exports = {
   async creater(req, res) {
@@ -98,6 +99,20 @@ module.exports = {
         res.status(200).json(confirmed);
       } else {
         res.status(404).send(confirmed);
+      }
+    } catch (error) {
+      console.error("Erro ao atualizar usuário:", error);
+      res.status(500).send("Erro interno do servidor");
+    }
+  },
+  async refreshToken(req, res) {
+    try {
+      const newToken = await refreshToken(req.body);
+
+      if (newToken.success) {
+        res.status(200).json(newToken);
+      } else {
+        res.status(404).send(newToken);
       }
     } catch (error) {
       console.error("Erro ao atualizar usuário:", error);

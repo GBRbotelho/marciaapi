@@ -5,6 +5,7 @@ const UserController = require("../../controllers/system/userController");
 router.post("/", UserController.creater);
 router.post("/code/:id", UserController.confirmCodeEmail);
 router.post("/login", UserController.login);
+router.post("/refresh", UserController.refreshToken);
 router.get("/token", UserController.getByToken);
 router.put("/:id", UserController.updater);
 router.delete("/:id", UserController.deleter);
