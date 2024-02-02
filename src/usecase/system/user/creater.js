@@ -39,7 +39,7 @@ const creater = async (data) => {
 
     const response = await repository.create(newUser);
 
-    await sendEmail(
+    sendEmail(
       email,
       "Codigo de Segurança",
       "Seu codigo de segurança é " + code
