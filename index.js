@@ -6,7 +6,6 @@ const routes = require("./src/adapters/routes/routes");
 const app = express();
 
 configExpress(app);
-connectMongo("@system");
 
 app.use(routes);
 
