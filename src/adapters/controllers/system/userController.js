@@ -16,11 +16,11 @@ module.exports = {
       if (created.success) {
         res.status(200).json(created);
       } else {
-        res.status(404).send(created);
+        res.status(404).json(created);
       }
     } catch (error) {
       console.error("Erro ao criar usuário:", error);
-      res.status(500).send("Erro interno do servidor");
+      res.status(500).json("Erro interno do servidor");
     }
   },
   async updater(req, res) {
@@ -33,11 +33,11 @@ module.exports = {
       if (updated.success) {
         res.status(200).json(updated);
       } else {
-        res.status(404).send(updated);
+        res.status(404).json(updated);
       }
     } catch (error) {
       console.error("Erro ao atualizar usuário:", error);
-      res.status(500).send("Erro interno do servidor");
+      res.status(500).json("Erro interno do servidor");
     }
   },
   async deleter(req, res) {
@@ -49,11 +49,11 @@ module.exports = {
       if (deleted.success) {
         res.status(200).json(deleted);
       } else {
-        res.status(404).send(deleted);
+        res.status(404).json(deleted);
       }
     } catch (error) {
       console.error("Erro ao deletar usuário:", error);
-      res.status(500).send("Erro interno do servidor");
+      res.status(500).json("Erro interno do servidor");
     }
   },
   async login(req, res) {
@@ -65,11 +65,11 @@ module.exports = {
       if (isLogin.success) {
         res.status(200).json(isLogin);
       } else {
-        res.status(404).send(isLogin);
+        res.status(404).json(isLogin);
       }
     } catch (error) {
       console.error("Erro ao criar usuário:", error);
-      res.status(500).send("Erro interno do servidor");
+      res.status(500).json("Erro interno do servidor");
     }
   },
   async getByToken(req, res) {
@@ -98,11 +98,11 @@ module.exports = {
       if (confirmed.success) {
         res.status(200).json(confirmed);
       } else {
-        res.status(404).send(confirmed);
+        res.status(404).json(confirmed);
       }
     } catch (error) {
       console.error("Erro ao atualizar usuário:", error);
-      res.status(500).send("Erro interno do servidor");
+      res.status(500).json("Erro interno do servidor");
     }
   },
   async refreshToken(req, res) {
@@ -112,11 +112,11 @@ module.exports = {
       if (newToken.success) {
         res.status(200).json(newToken);
       } else {
-        res.status(404).send(newToken);
+        res.status(404).json(newToken);
       }
     } catch (error) {
       console.error("Erro ao atualizar usuário:", error);
-      res.status(500).send("Erro interno do servidor");
+      res.status(500).json("Erro interno do servidor");
     }
   },
 };

@@ -1,7 +1,6 @@
 const connectMongo = require("../frameworks/mongoose/connect");
 
 async function dbMiddleware(req, res, next) {
-  console.log("Passou");
   const sistemaId = req.headers["sistema-id"];
   try {
     if (sistemaId) {

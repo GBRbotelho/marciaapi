@@ -15,11 +15,6 @@ const companySchema = new mongoose.Schema({
     required: true,
     default: 0,
   },
-  month: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
   active: {
     type: Boolean,
     required: true,
