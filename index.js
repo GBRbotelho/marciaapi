@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const configExpress = require("./src/frameworks/express/config");
-const connectMongo = require("./src/frameworks/mongoose/connect");
 const routes = require("./src/adapters/routes/routes");
 const app = express();
 
