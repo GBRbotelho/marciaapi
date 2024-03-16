@@ -1,8 +1,8 @@
 const repository = require("../../../adapters/repositories/system/companyRepository");
 
-const getByAdmin = async (id, db) => {
+const getById = async (id, db) => {
   try {
-    const company = await repository.getByAdmin(id, db);
+    const company = await repository.getById(id, db);
 
     if (!company) {
       return {
@@ -22,4 +22,4 @@ const getByAdmin = async (id, db) => {
   }
 };
 
-module.exports = getByAdmin;
+module.exports = getById;

@@ -1,5 +1,6 @@
 const creater = require("../../../usecase/system/company/creater");
-const geyByAdmin = require("../../../usecase/system/company/getByAdmin");
+const getByAdmin = require("../../../usecase/system/company/getByAdmin");
+const getById = require("../../../usecase/system/company/getById");
 
 module.exports = {
   async creater(req, res) {
@@ -24,7 +25,24 @@ module.exports = {
       const { id } = req.params;
       const db = req.systemDb;
 
-      const system = await geyByAdmin(id, db);
+      const system = await getByAdmin(id, db);
+
+      if (system.success) {
+        res.status(200).json(system);
+      } else {
+        res.status(404).json(system);
+      }
+    } catch (error) {
+      console.error("Erro ao encontrar ambiente:", error);
+      res.status(500).send("Erro interno do servidor");
+    }
+  },
+  async getById(req, res) {
+    try {
+      const { id } = req.params;
+      const db = req.systemDb;
+
+      const system = await getById(id, db);
 
       if (system.success) {
         res.status(200).json(system);
