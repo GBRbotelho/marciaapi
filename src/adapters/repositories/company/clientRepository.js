@@ -4,18 +4,18 @@ module.exports = {
   async create(clientData, db) {
     return await db.model("Client", clientSchema).create(clientData);
   },
-  async update(clientId, clientData) {
+  async update(clientId, clientData, db) {
     return await db
       .model("Client", clientSchema)
       .findByIdAndUpdate(clientId, clientData, { new: true });
   },
-  async getAll() {
+  async getAll(db) {
     return await db.model("Client", clientSchema).find();
   },
-  async getById(clientId) {
+  async getById(clientId, db) {
     return await db.model("Client", clientSchema).findById(clientId);
   },
-  async delete(clientId) {
+  async delete(clientId, db) {
     return await db.model("Client", clientSchema).findByIdAndDelete(clientId);
   },
 };

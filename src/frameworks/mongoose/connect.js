@@ -20,7 +20,7 @@ async function connectMongo(bd) {
       resolve(connection);
     });
 
-    console.log("Conexão com o MongoDB estabelecida com sucesso no BD " + bd);
+    // console.log("Conexão com o MongoDB estabelecida com sucesso no BD " + bd);
 
     return db;
   } catch (error) {

@@ -1,4 +1,5 @@
 const creater = require("../../../usecase/company/client/creater");
+const getAll = require("../../../usecase/company/client/getAll");
 
 module.exports = {
   async creater(req, res) {
@@ -16,6 +17,22 @@ module.exports = {
     } catch (error) {
       console.error("Erro ao criar cliente:", error);
       res.status(500).json("Erro interno do servidor");
+    }
+  },
+  async getAll(req, res) {
+    try {
+      const db = req.systemDb;
+
+      const clients = await getAll(db);
+
+      if (clients.success) {
+        res.status(200).json(clients);
+      } else {
+        res.status(404).json(clients);
+      }
+    } catch (error) {
+      console.error("Erro ao encontrar clientes:", error);
+      res.status(500).send("Erro interno do servidor");
     }
   },
 };
