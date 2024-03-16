@@ -1,6 +1,6 @@
 const repository = require("../../../adapters/repositories/system/companyRepository");
 
-const creater = async (data) => {
+const creater = async (data, db) => {
   try {
     const { name, admin, plan, active, dateInitial, dateFinal } = data;
 
@@ -13,7 +13,7 @@ const creater = async (data) => {
       dateFinal,
     };
 
-    const response = await repository.create(newCompany);
+    const response = await repository.create(newCompany, db);
 
     return {
       success: true,

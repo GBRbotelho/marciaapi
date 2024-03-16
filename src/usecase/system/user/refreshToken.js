@@ -1,9 +1,8 @@
 const jwtService = require("../../../frameworks/jsonwebtoken/jwtService");
 
-module.exports = async (data) => {
+module.exports = async (data, db) => {
   try {
     const { token } = data;
-    console.log(data);
 
     if (!token) {
       return { success: false, message: "Token não fornecido", data: "" };

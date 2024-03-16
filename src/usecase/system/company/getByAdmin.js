@@ -1,8 +1,8 @@
 const repository = require("../../../adapters/repositories/system/companyRepository");
 
-const geyByAdmin = async (id) => {
+const geyByAdmin = async (id, db) => {
   try {
-    const company = await repository.getByAdmin(id);
+    const company = await repository.getByAdmin(id, db);
 
     if (!company) {
       return {

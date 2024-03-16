@@ -3,11 +3,11 @@ const bcrypt = require("bcrypt");
 const { sendEmail } = require("../../../frameworks/gmailapi/gmailService");
 const generateRandomCode = require("../../../utils/generateRandomCode");
 
-const creater = async (data) => {
+const creater = async (data, db) => {
   try {
     const { name, email, password, companies, cpf } = data;
 
-    const emailValidate = await repository.getByEmail(email);
+    const emailValidate = await repository.getByEmail(email, db);
     if (emailValidate) {
       return {
         success: false,
@@ -15,7 +15,7 @@ const creater = async (data) => {
       };
     }
 
-    const cpfValidate = await repository.getByCpf(cpf);
+    const cpfValidate = await repository.getByCpf(cpf, db);
     if (cpfValidate) {
       return {
         success: false,
@@ -37,7 +37,7 @@ const creater = async (data) => {
 
     newUser.password = await bcrypt.hash(newUser.password, 10);
 
-    const response = await repository.create(newUser);
+    const response = await repository.create(newUser, db);
 
     sendEmail(
       email,

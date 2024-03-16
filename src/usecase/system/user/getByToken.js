@@ -1,7 +1,7 @@
 const repository = require("../../../adapters/repositories/system/userRepository");
 const jwtService = require("../../../frameworks/jsonwebtoken/jwtService");
 
-const getByToken = async (token) => {
+const getByToken = async (token, db) => {
   try {
     if (!token) {
       return { success: false, message: "Token não recebido" };
@@ -11,7 +11,7 @@ const getByToken = async (token) => {
     if (!decoded) {
       return { success: false, message: "Token invalido" };
     }
-    const user = await repository.getById(decoded.userId);
+    const user = await repository.getById(decoded.userId, db);
     user.emailConfirmationCode = null;
     return {
       success: true,

@@ -1,24 +1,26 @@
-const Company = require("../../../entity/system/company");
+const companySchema = require("../../../entity/system/company");
 
 module.exports = {
-  async create(companyData) {
-    return await Company.create(companyData);
+  async create(companyData, db) {
+    return await db.model("Company", companySchema).create(companyData);
   },
   async update(companyId, companyData) {
-    return await Company.findByIdAndUpdate(companyId, companyData, {
-      new: true,
-    });
+    return await db
+      .model("Company", companySchema)
+      .findByIdAndUpdate(companyId, companyData, {
+        new: true,
+      });
   },
-  async getByAdmin(admin) {
-    return await Company.find({ admin });
+  async getByAdmin(admin, db) {
+    return await db.model("Company", companySchema).find({ admin });
   },
-  async getAll() {
-    return await Company.find();
+  async getAll(db) {
+    return await db.model("Company", companySchema).find();
   },
-  async getById(companyId) {
-    return await Company.findById(companyId);
+  async getById(companyId, db) {
+    return await db.model("Company", companySchema).findById(companyId);
   },
-  async delete(clientId) {
-    return await Company.findByIdAndDelete(clientId);
+  async delete(clientId, db) {
+    return await db.model("Company", companySchema).findByIdAndDelete(clientId);
   },
 };

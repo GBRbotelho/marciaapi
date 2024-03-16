@@ -2,10 +2,10 @@ const repository = require("../../../adapters/repositories/system/userRepository
 const bcrypt = require("bcrypt");
 const jwtService = require("../../../frameworks/jsonwebtoken/jwtService");
 
-const login = async (userData) => {
+const login = async (userData, db) => {
   try {
     // Verificar se o usuário existe
-    const user = await repository.getByEmail(userData.email);
+    const user = await repository.getByEmail(userData.email, db);
     if (!user) {
       return { success: false, message: "Usuário não encontrado" };
     }

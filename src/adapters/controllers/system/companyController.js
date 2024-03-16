@@ -5,8 +5,9 @@ module.exports = {
   async creater(req, res) {
     try {
       const data = req.body;
+      const db = req.systemDb;
 
-      const created = await creater(data);
+      const created = await creater(data, db);
 
       if (created.success) {
         res.status(200).json(created);
@@ -21,8 +22,9 @@ module.exports = {
   async getByAdmin(req, res) {
     try {
       const { id } = req.params;
+      const db = req.systemDb;
 
-      const system = await geyByAdmin(id);
+      const system = await geyByAdmin(id, db);
 
       if (system.success) {
         res.status(200).json(system);

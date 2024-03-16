@@ -11,7 +11,7 @@ function configureExpress(app) {
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(cors());
   app.use(errorHandler());
-  app.use(morgan("combined"));
+  // app.use(morgan("combined"));
   app.use(helmet());
 
   return app;

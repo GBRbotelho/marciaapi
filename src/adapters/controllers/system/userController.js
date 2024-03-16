@@ -10,8 +10,9 @@ module.exports = {
   async creater(req, res) {
     try {
       const data = req.body;
+      const db = req.systemDb;
 
-      const created = await creater(data);
+      const created = await creater(data, db);
 
       if (created.success) {
         res.status(200).json(created);
@@ -27,8 +28,9 @@ module.exports = {
     try {
       const userId = req.params.id;
       const updatedUserData = req.body;
+      const db = req.systemDb;
 
-      const updated = await updater(userId, updatedUserData);
+      const updated = await updater(userId, updatedUserData, db);
 
       if (updated.success) {
         res.status(200).json(updated);
@@ -43,8 +45,9 @@ module.exports = {
   async deleter(req, res) {
     try {
       const userId = req.params.id;
+      const db = req.systemDb;
 
-      const deleted = await deleter(userId);
+      const deleted = await deleter(userId, db);
 
       if (deleted.success) {
         res.status(200).json(deleted);
@@ -59,8 +62,9 @@ module.exports = {
   async login(req, res) {
     try {
       const data = req.body;
+      const db = req.systemDb;
 
-      const isLogin = await login(data);
+      const isLogin = await login(data, db);
 
       if (isLogin.success) {
         res.status(200).json(isLogin);
@@ -75,8 +79,9 @@ module.exports = {
   async getByToken(req, res) {
     try {
       const token = req.headers.authorization;
+      const db = req.systemDb;
 
-      const userData = await getByToken(token);
+      const userData = await getByToken(token, db);
 
       if (userData) {
         return res.status(200).json(userData);
@@ -91,9 +96,9 @@ module.exports = {
     try {
       const userId = req.params.id;
       const data = req.body;
-      console.log("Data é");
-      console.log(data);
-      const confirmed = await confirmCode(userId, data);
+      const db = req.systemDb;
+
+      const confirmed = await confirmCode(userId, data, db);
 
       if (confirmed.success) {
         res.status(200).json(confirmed);
@@ -107,7 +112,8 @@ module.exports = {
   },
   async refreshToken(req, res) {
     try {
-      const newToken = await refreshToken(req.body);
+      const db = req.systemDb;
+      const newToken = await refreshToken(req.body, db);
 
       if (newToken.success) {
         res.status(200).json(newToken);
