@@ -1,4 +1,5 @@
 const creater = require("../../../usecase/company/client/creater");
+const deleter = require("../../../usecase/company/client/delete");
 const getAll = require("../../../usecase/company/client/getAll");
 
 module.exports = {
@@ -33,6 +34,23 @@ module.exports = {
     } catch (error) {
       console.error("Erro ao encontrar clientes:", error);
       res.status(500).send("Erro interno do servidor");
+    }
+  },
+  async deleter(req, res) {
+    try {
+      const userId = req.params.id;
+      const db = req.systemDb;
+
+      const deleted = await deleter(userId, db);
+
+      if (deleted.success) {
+        res.status(200).json(deleted);
+      } else {
+        res.status(404).json(deleted);
+      }
+    } catch (error) {
+      console.error("Erro ao deletar cliente:", error);
+      res.status(500).json("Erro interno do servidor");
     }
   },
 };

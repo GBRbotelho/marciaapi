@@ -13,14 +13,21 @@ async function connectMongo(bd) {
     const db = new Promise(async (resolve, reject) => {
       const connection = await mongoose
         .createConnection(
-          `${process.env.DB}${bd}${process.env.DB2}`,
+          `${process.env.DB}${bd === "@system" ? "sistema" : bd}${
+            process.env.DB2 !== undefined ? process.env.DB2 : ""
+          }`,
           mongoOptions
         )
         .asPromise();
       resolve(connection);
     });
 
-    // console.log("Conexão com o MongoDB estabelecida com sucesso no BD " + bd);
+    console.log("Conexão com o MongoDB estabelecida com sucesso no BD " + bd);
+    console.log(
+      `${bd === "@system" ? "sistema" : bd}${
+        process.env.DB2 !== undefined ? process.env.DB2 : ""
+      }`
+    );
 
     return db;
   } catch (error) {
